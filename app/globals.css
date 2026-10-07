@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- Palette: Inverted to White Theme ---- */
+  --color-cream: #0e1312;
+  --color-sand: #1a2422;
+  --color-shell: #2a3431;
+  --color-ink: #ffffff;
+  --color-ink-soft: #fbf8f3;
+  --color-muted: #6b7773;
+
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dbe7ff;
+  --color-brand-200: #bcd3ff;
+  --color-brand-300: #90b7ff;
+  --color-brand-400: #5a90fb;
+  --color-brand-500: #2f6ff0;
+  --color-brand-600: #1a56d9;
+  --color-brand-700: #1546b4;
+  --color-brand-800: #13398f;
+  --color-brand-900: #123072;
+  --color-brand-950: #0b1c44;
+
+  --color-marigold-200: #ffe0e2;
+  --color-marigold-300: #ffbfc4;
+  --color-marigold-400: #ff8f97;
+  --color-marigold-500: #f5333f;
+  --color-marigold-600: #c11720;
+
+  /* ---- Type ---- */
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+
+  /* ---- Motion ---- */
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.8s ease-out both;
+  --animate-fade-in-slow: fade-in 1.2s ease-out both;
+  --animate-scale-in: scale-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-spin-slow: spin 22s linear infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--color-marigold-300);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilities                                                           */
+/* ------------------------------------------------------------------ */
+
+/* Paper grain — a very subtle noise wash over light sections */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+}
+
+/* Soft radial glow used behind dark heroes */
+.glow-dots {
+  background-image: radial-gradient(
+    circle at center,
+    rgb(255 255 255 / 0.14) 1px,
+    transparent 1px
+  );
+  background-size: 26px 26px;
+}
+
+.glass {
+  background: rgb(255 255 255 / 0.07);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgb(255 255 255 / 0.14);
+}
+
+/* Stagger helper for hero children */
+.stagger > * {
+  animation-delay: calc(var(--i, 0) * 110ms);
+}
+
+/* ------------------------------------------------------------------ */
+/* Family tree connectors                                              */
+/* ------------------------------------------------------------------ */
+
+.tree,
+.tree ul {
+  list-style: none;
+  margin: 0;
+}
+
+.tree ul {
+  position: relative;
+  padding-left: 30px;
+}
+
+.tree li {
+  position: relative;
+  padding: 7px 0;
+}
+
+/* horizontal stub into the node */
+.tree li::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 38px;
+  width: 30px;
+  height: 1px;
+  background-color: color-mix(in srgb, var(--color-ink) 18%, transparent);
+}
+
+/* vertical rail */
+.tree li::after {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background-color: color-mix(in srgb, var(--color-ink) 18%, transparent);
+}
+
+.tree li:last-child::after {
+  height: 38px;
+}
+
+.tree > li::before,
+.tree > li::after {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion                                                      */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

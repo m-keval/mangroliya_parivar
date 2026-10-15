@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { members, site, stats, timeline, values } from "@/lib/data";
-import { PageHero, PageSection, TextLink } from "@/components/page-hero";
+import { PageHero, TextLink } from "@/components/page-hero";
 import { Icon } from "@/components/icon";
 import { MemberCard } from "@/components/member-card";
 import { TimelineCarousel } from "@/components/timeline-carousel";
+import { AboutSidebar } from "@/components/about-sidebar";
 
 export const metadata: Metadata = {
   title: "Hamari Kahani — Our Story",
@@ -29,26 +30,10 @@ export default function AboutPage() {
         crumbs={[{ label: "અમારો પરિચય" }]}
       />
 
-      <PageSection className="py-12 sm:py-20 bg-cream">
-        <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16">
+      <section className="relative bg-cream">
+        <div className="w-full max-w-none px-3 sm:px-5 lg:px-6 2xl:px-8 py-12 sm:py-16 flex flex-col md:flex-row gap-8 md:gap-10 2xl:gap-14">
           
-          {/* Sidebar / Mobile Nav */}
-          <aside className="md:w-64 lg:w-72 shrink-0 sticky top-[61px] sm:top-[73px] md:top-28 z-30 self-start w-full">
-            <div className="bg-cream/95 md:bg-white/50 backdrop-blur-xl md:rounded-3xl py-3 md:p-6 md:border md:border-ink/5 md:shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] -mx-4 px-4 sm:mx-0 sm:px-0">
-              <h3 className="hidden md:block font-display font-bold text-ink text-lg mb-4">અમારો પરિચય</h3>
-              <nav className="flex flex-row md:flex-col gap-3 md:gap-1 md:border-l-2 md:border-brand-100 md:pl-4 overflow-x-auto no-scrollbar relative items-center md:items-start pb-2 md:pb-0">
-                <a href="#patidar-history" className="shrink-0 whitespace-nowrap rounded-full md:rounded-none bg-white md:bg-transparent px-5 py-2.5 md:px-0 md:py-2 text-[14px] md:text-[14.5px] text-ink hover:text-brand-700 font-semibold md:text-ink/70 transition-colors shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] md:shadow-none border border-ink/10 md:border-transparent">
-                  પાટીદાર પ્રજાનાં મૂળ અને કુળ
-                </a>
-                <a href="#kuldevi" className="shrink-0 whitespace-nowrap rounded-full md:rounded-none bg-white md:bg-transparent px-5 py-2.5 md:px-0 md:py-2 text-[14px] md:text-[14.5px] text-ink hover:text-brand-700 font-semibold md:text-ink/70 transition-colors shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] md:shadow-none border border-ink/10 md:border-transparent">
-                  કુળદેવી આઈ શ્રી ગૌરી સત્યાય
-                </a>
-                <a href="#sneh-milan" className="shrink-0 whitespace-nowrap rounded-full md:rounded-none bg-white md:bg-transparent px-5 py-2.5 md:px-0 md:py-2 text-[14px] md:text-[14.5px] text-ink hover:text-brand-700 font-semibold md:text-ink/70 transition-colors shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] md:shadow-none border border-ink/10 md:border-transparent">
-                  સ્નેહ મિલન સમારોહ
-                </a>
-              </nav>
-            </div>
-          </aside>
+          <AboutSidebar />
 
           {/* Main Content */}
           <div className="flex-1 space-y-24 min-w-0">
@@ -232,38 +217,33 @@ export default function AboutPage() {
             
             {/* Sneh Milan Section */}
             <section id="sneh-milan" className="scroll-mt-32">
-              <h2 className="font-display text-2xl leading-snug font-bold text-ink sm:text-3xl text-center mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-ink/10">
-                સ્નેહ મિલન સમારોહની શરૂઆત કેવી રીતે થઈ
-              </h2>
-              
-              <div className="space-y-6 text-base leading-relaxed text-ink/80 sm:text-lg">
-                <div className="float-right w-full sm:w-80 md:w-[400px] ml-0 sm:ml-8 mb-6 sm:mb-4 rounded-xl overflow-hidden border border-ink/5 shadow-sm">
-                  <Image
-                    src="/snehmilan.jpg"
-                    alt="માંગરોળીયા પરિવાર સ્નેહ મિલન સમારોહ"
-                    width={800}
-                    height={600}
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-
-                <p>
-                  માંગરોળીયા પરિવારના પ્રથમ સ્નેહ મિલન સમારોહની શરૂઆત આજથી ૩૬ વર્ષ પહેલાં થઈ હતી. પરિવારના વડીલો અને અગ્રણીઓએ સૌને એક છત નીચે લાવવાનો વિચાર કર્યો હતો. આ નાનકડી શરૂઆત આજે એક વિશાળ વટવૃક્ષ બની ગઈ છે. શરૂઆતના વર્ષોમાં માત્ર ગણતરીના પરિવારો જ આ સમારોહમાં હાજરી આપતા હતા, પરંતુ આજે દર વર્ષે હજારો સભ્યો ભેગા મળીને આ સમારોહને હર્ષોલ્લાસથી ઉજવે છે.
+              <div className="border-b border-ink/10 pb-6 sm:pb-8 mb-6 sm:mb-8">
+                <p className="text-brand-600 text-sm sm:text-base font-medium tracking-wide text-center">
+                  1991 — 2025 · 35 વર્ષની પરંપરા
                 </p>
-                <p>
-                  વર્ષોથી ચાલતી આવતી આ પરંપરા પરિવારના સભ્યો વચ્ચે પ્રેમ, એકતા અને ભાઈચારો જાળવી રાખવાનું એક અદ્ભુત માધ્યમ બની છે. સમારોહનો મુખ્ય હેતુ પરિવારના યુવાનો અને નવી પેઢીને પોતાના મૂળ, સંસ્કૃતિ અને વડીલોના સંસ્કારો સાથે જોડી રાખવાનો છે. આજના ઝડપી યુગમાં જ્યાં લોકો એકબીજાથી દૂર થતા જાય છે, ત્યાં આ સ્નેહ મિલન એકતાનું પ્રતીક બની રહ્યું છે.
-                </p>
-                <p>
-                  સ્નેહ મિલન સમારોહમાં દર વર્ષે વિવિધ કાર્યક્રમોનું આયોજન કરવામાં આવે છે. યુવાનો અને વડીલો સાથે મળીને સાંસ્કૃતિક કાર્યક્રમો રજૂ કરે છે. શિક્ષણ, રમતગમત અને અન્ય ક્ષેત્રોમાં સિદ્ધિ પ્રાપ્ત કરનાર પરિવારના તેજસ્વી તારલાઓનું સન્માન કરવામાં આવે છે. આ ઉપરાંત, ભોજન સમારંભ દ્વારા સૌ એકબીજા સાથે વાર્તાલાપ કરવાનો અને નવા સંબંધો બાંધવાનો આનંદ માણે છે. આ સ્નેહ મિલન માત્ર એક ઉત્સવ નથી, પરંતુ માંગરોળીયા પરિવારના મૂળિયાંને સિંચવાનું અને ભવિષ્યની પેઢીને માર્ગદર્શન આપવાનું એક મહત્ત્વપૂર્ણ કાર્ય છે.
-                </p>
-
-                <TimelineCarousel />
+                <h2 className="mt-2 font-display text-2xl leading-snug font-bold text-ink sm:text-3xl text-center">
+                  સ્નેહ મિલન સમારોહની શરૂઆત કેવી રીતે થઈ
+                </h2>
               </div>
+
+              <div className="grid gap-5 md:grid-cols-3 text-[15px] sm:text-base leading-relaxed text-ink/75">
+                <p className="rounded-2xl border border-ink/10 bg-white p-5 sm:p-6 shadow-[0_8px_24px_-16px_rgba(0,0,0,0.2)]">
+                  માંગરોળીયા પરિવારના પ્રથમ સ્નેહ મિલન સમારોહની શરૂઆત આજથી ૩૫ વર્ષ પહેલાં થઈ હતી. વડીલોના એક વિચારથી સૌ એક છત નીચે આવ્યા — એ નાનકડી શરૂઆત આજે વિશાળ વટવૃક્ષ બની છે.
+                </p>
+                <p className="rounded-2xl border border-ink/10 bg-white p-5 sm:p-6 shadow-[0_8px_24px_-16px_rgba(0,0,0,0.2)]">
+                  વર્ષોની આ પરંપરા પ્રેમ, એકતા અને ભાઈચારો જાળવવાનું માધ્યમ બની છે. યુવાનોને મૂળ, સંસ્કૃતિ અને સંસ્કારો સાથે જોડી રાખવાનો એ જ મુખ્ય હેતુ છે.
+                </p>
+                <p className="rounded-2xl border border-ink/10 bg-white p-5 sm:p-6 shadow-[0_8px_24px_-16px_rgba(0,0,0,0.2)]">
+                  દર વર્ષે સાંસ્કૃતિક કાર્યક્રમો, તેજસ્વી તારલાઓનું સન્માન અને સમૂહ ભોજન થાય છે. આ માત્ર ઉત્સવ નથી — મૂળિયાંને સિંચવાનું કાર્ય છે.
+                </p>
+              </div>
+
+              <TimelineCarousel />
             </section>
             
           </div>
         </div>
-      </PageSection>
+      </section>
 
     </>
   );

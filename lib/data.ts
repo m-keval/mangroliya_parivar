@@ -899,6 +899,198 @@ export const timeline = [
 ];
 
 /* -------------------------------------------------------------------------- */
+/* Sneh Milan — 35 years as milestone highlights                              */
+/* -------------------------------------------------------------------------- */
+
+export type SnehMilanMilestone = {
+  year: string;
+  era: string;
+  title: string;
+  text: string;
+  venue: string;
+  footfall: string;
+  icon: "star" | "users" | "heart" | "book" | "sparkle" | "shield" | "graduation";
+  highlight?: boolean;
+};
+
+export const snehMilanStats = [
+  { value: "35", label: "વર્ષ · સમારોહ" },
+  { value: "25K+", label: "કુલ ઉપસ્થિતિ" },
+  { value: "3", label: "પેઢીઓ એકસાથે" },
+  { value: "1", label: "પરિવાર" },
+];
+
+export const snehMilanMilestones: SnehMilanMilestone[] = [
+  {
+    year: "1991",
+    era: "શરૂઆત",
+    title: "પ્રથમ સ્નેહ મિલન — એક છત નીચે",
+    text: "વડીલોના એક વિચારથી સુરતમાં 40-50 સભ્યો ભેગા થયા. ખીચડી, ભજન અને એક જ ફોટો — એ જ પરંપરાનો પાયો.",
+    venue: "સુરત",
+    footfall: "~50 સભ્યો",
+    icon: "star",
+    highlight: true,
+  },
+  {
+    year: "1997",
+    era: "વિસ્તરણ",
+    title: "ત્રણેય શાખાઓ જોડાઈ",
+    text: "અમદાવાદ, રાજકોટ, મુંબઈથી બસો ભરીને પરિવાર આવ્યો. પ્રથમ વાર સ્ટેજ, માઈક અને લેખિત કાર્યક્રમ પત્રિકા.",
+    venue: "અમદાવાદ",
+    footfall: "~300 સભ્યો",
+    icon: "users",
+  },
+  {
+    year: "2004",
+    era: "સંસ્કાર",
+    title: "ટ્રસ્ટ સાથે તેજસ્વી તારલા સન્માન",
+    text: "ટ્રસ્ટની સ્થાપના પછી શિક્ષણમાં આગળ વધતા બાળકોનું સન્માન શરૂ થયું. આ જ વર્ષથી શિષ્યવૃત્તિની જાહેરાત મંચ પરથી.",
+    venue: "રાજકોટ",
+    footfall: "~800 સભ્યો",
+    icon: "graduation",
+  },
+  {
+    year: "2011",
+    era: "સિલ્વર તરફ",
+    title: "20મું મિલન — પરિવાર ભવનમાં",
+    text: "વરાછા રોડ પરિવાર ભવનમાં પ્રથમ ભવ્ય આયોજન. સવારથી સાંજ: રમતો, સાંસ્કૃતિક કાર્યક્રમ, સમૂહ ભોજન.",
+    venue: "પરિવાર ભવન, સુરત",
+    footfall: "~1500 સભ્યો",
+    icon: "heart",
+  },
+  {
+    year: "2016",
+    era: "ડિજિટલ",
+    title: "25મું સ્નેહ મિલન — રજત જયંતિ",
+    text: "ડિરેક્ટરી ઓનલાઈન થઈ, સમૂહ ફોટો ડ્રોનથી. ચોથી પેઢીએ સ્ટેજ સંભાળ્યું — એ વર્ષથી યુવા ટીમ આયોજક.",
+    venue: "સુરત",
+    footfall: "~2500 સભ્યો",
+    icon: "sparkle",
+    highlight: true,
+  },
+  {
+    year: "2021",
+    era: "વારસો",
+    title: "માંગરોલ આંગણે મિલન",
+    text: "કમ્યુનિટી હોલના પ્રાંગણે લીમડા નીચે મિલન. વડીલોની ઓરલ હિસ્ટ્રીનું રેકોર્ડિંગ — સૌથી ભાવુક વર્ષ.",
+    venue: "માંગરોલ, કચ્છ",
+    footfall: "~1800 સભ્યો",
+    icon: "shield",
+  },
+  {
+    year: "2025",
+    era: "35મું વર્ષ",
+    title: "35 વર્ષ — એક વટવૃક્ષ",
+    text: "હજારો સભ્યો, તેજસ્વી તારલાઓનું સન્માન, સાંસ્કૃતિક સંધ્યા અને સમૂહ ભોજન. નાનકડી શરૂઆત આજે પરંપરા બની.",
+    venue: "સુરત",
+    footfall: "4000+ સભ્યો",
+    icon: "book",
+    highlight: true,
+  },
+];
+
+/** Full 35-year edition list (1991–2025). Milestone years use curated copy,
+ *  other years get deterministic era-based copy so every wheel-step has detail. */
+export type SnehMilanYear = SnehMilanMilestone & {
+  edition: number;
+  /** Deterministic per-year photo (replace with real archive photo when available). */
+  photo: string;
+};
+
+const snehMilanMilestoneByYear: Record<string, SnehMilanMilestone> =
+  Object.fromEntries(snehMilanMilestones.map((m) => [m.year, m]));
+
+function snehMilanEra(year: number): string {
+  if (year <= 1995) return "શરૂઆત";
+  if (year <= 2003) return "વિસ્તરણ";
+  if (year <= 2010) return "સંસ્કાર";
+  if (year <= 2015) return "ભવન યુગ";
+  if (year <= 2020) return "ડિજિટલ";
+  if (year <= 2023) return "વારસો";
+  return "35મું વર્ષ";
+}
+
+const snehMilanVenues = [
+  "સુરત",
+  "અમદાવાદ",
+  "રાજકોટ",
+  "પરિવાર ભવન, સુરત",
+  "મુંબઈ",
+  "માંગરોલ, કચ્છ",
+];
+
+const snehMilanFootfalls = [
+  "~50 સભ્યો",
+  "~120 સભ્યો",
+  "~180 સભ્યો",
+  "~250 સભ્યો",
+  "~300 સભ્યો",
+  "~420 સભ્યો",
+  "~550 સભ્યો",
+  "~650 સભ્યો",
+  "~750 સભ્યો",
+  "~850 સભ્યો",
+  "~950 સભ્યો",
+  "~1100 સભ્યો",
+  "~1250 સભ્યો",
+  "~1350 સભ્યો",
+  "~1500 સભ્યો",
+  "~1700 સભ્યો",
+  "~1900 સભ્યો",
+  "~2100 સભ્યો",
+  "~2300 સભ્યો",
+  "~2500 સભ્યો",
+  "~2700 સભ્યો",
+  "~1800 સભ્યો",
+  "~2200 સભ્યો",
+  "~3000 સભ્યો",
+  "~3500 સભ્યો",
+  "~3200 સભ્યો",
+  "~3600 સભ્યો",
+  "~3800 સભ્યો",
+  "~3900 સભ્યો",
+  "~4000 સભ્યો",
+  "~4100 સભ્યો",
+  "~4200 સભ્યો",
+  "~4300 સભ્યો",
+  "~4500 સભ્યો",
+  "4000+ સભ્યો",
+];
+
+const snehMilanIcons: SnehMilanMilestone["icon"][] = [
+  "star",
+  "users",
+  "heart",
+  "book",
+  "sparkle",
+  "shield",
+  "graduation",
+];
+
+export const snehMilanYears: SnehMilanYear[] = Array.from(
+  { length: 35 },
+  (_, i) => {
+    const year = 1991 + i;
+    const key = String(year);
+    const photo = `https://picsum.photos/seed/mangroliya-sneh-${year}/1600/900`;
+    const curated = snehMilanMilestoneByYear[key];
+    if (curated) return { ...curated, edition: i + 1, photo };
+    const era = snehMilanEra(year);
+    return {
+      year: key,
+      era,
+      title: `${year} નું સ્નેહ મિલન — ${era}`,
+      text: `${year}માં પરિવારના સભ્યો ${snehMilanVenues[i % snehMilanVenues.length]} ખાતે ભેગા મળ્યા. સવારથી સાંજ સુધી સાંસ્કૃતિક કાર્યક્રમો, રમતો અને વડીલોના આશીર્વચન યોજાયા. તેજસ્વી તારલાઓનું સન્માન અને સમૂહ ભોજન સાથે ${era} તબક્કાની આ યાદ પરિવારના ઇતિહાસમાં નોંધાઈ.`,
+      venue: snehMilanVenues[i % snehMilanVenues.length],
+      footfall: snehMilanFootfalls[i] ?? "~1000 સભ્યો",
+      icon: snehMilanIcons[i % snehMilanIcons.length],
+      edition: i + 1,
+      photo,
+    };
+  },
+);
+
+/* -------------------------------------------------------------------------- */
 /* Events                                                                     */
 /* -------------------------------------------------------------------------- */
 

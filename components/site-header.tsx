@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { navLinks } from "@/lib/data";
+import { motion, LayoutGroup } from "framer-motion";
+import { primaryNav, site } from "@/lib/data";
 import { Icon } from "@/components/icon";
 import { Wordmark } from "@/components/logo";
 
@@ -12,8 +13,6 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Close the mobile menu whenever the route changes (state adjusted during
-  // render, so no setState inside an effect).
   const [lastPathname, setLastPathname] = useState(pathname);
   if (lastPathname !== pathname) {
     setLastPathname(pathname);
@@ -30,62 +29,92 @@ export default function SiteHeader() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  const renderNavItems = (items: typeof primaryNav) =>
+    items.map((item) => {
+      const active = "href" in item ? isActive(item.href) : false;
+
+      if ("children" in item) {
+        return (
+          <div key={item.label} className="group relative">
+            <button
+              className="relative flex w-full items-center justify-between px-4 py-3 text-base font-medium text-ink/70 hover:text-ink cursor-default"
+            >
+              <span className="relative z-10">{item.label}</span>
+              <Icon name="chevron-down" size={16} className="relative z-10 ml-2 shrink-0 text-ink/50" />
+            </button>
+            <div className="absolute left-0 top-full hidden min-w-[200px] rounded-xl border border-ink/10 bg-white py-2 shadow-lg z-20 group-hover:block">
+              {item.children.map((child) => (
+                <Link
+                  key={child.label}
+                  href={child.href}
+                  className={`block px-4 py-2.5 text-sm transition-colors ${
+                    isActive(child.href)
+                      ? "bg-brand-50 text-brand-700"
+                      : "text-ink/80 hover:bg-sand"
+                  }`}
+                >
+                  <span className="font-medium">{child.label}</span>
+                  <span className="block text-[11px] text-ink/40">{child.en}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        );
+      }
+      return (
+        <Link
+          key={item.href}
+          href={item.href}
+          aria-current={active ? "page" : undefined}
+          className={`relative px-4 py-2 text-base font-medium transition-colors ${
+            active ? "text-brand-700" : "text-ink/70 hover:text-ink"
+          }`}
+        >
+          {active && (
+            <motion.div
+              layoutId="desktop-nav-pill"
+              className="absolute inset-0 z-0 rounded-full bg-ink/5"
+              transition={{ type: "spring", stiffness: 350, damping: 30 }}
+            />
+          )}
+          <span className="relative z-10">{item.label}</span>
+        </Link>
+      );
+    });
+
   return (
     <header className="sticky top-0 z-50">
-      {/* Announcement strip */}
-      <div className="hidden bg-ink text-cream md:block">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-2 text-[13px]">
-          <p className="flex items-center gap-2 text-cream/75">
-            <Icon name="calendar" size={15} />
-            <span>
-              <span className="text-marigold-300">Next up:</span> Diwali Milan
-              — 24 October 2026, Surat
-            </span>
-          </p>
-          <div className="flex items-center gap-5">
-            <Link
-              href="/news"
-              className="text-cream/70 transition-colors hover:text-marigold-300"
-            >
-              સમાચાર
-            </Link>
-            <Link
-              href="/downloads"
-              className="text-cream/70 transition-colors hover:text-marigold-300"
-            >
-              ડોઉનલોડ
-            </Link>
-            <Link
-              href="/contact"
-              className="text-cream/70 transition-colors hover:text-marigold-300"
-            >
-              સંપર્ક
-            </Link>
-          </div>
-        </div>
-      </div>
-
       <div
         className={`border-b transition-all duration-300 ${
           scrolled
-            ? "border-ink/10 bg-cream/85 shadow-[0_10px_30px_-24px_rgba(14,19,18,0.9)] backdrop-blur-xl"
-            : "border-transparent bg-cream/70 backdrop-blur-md"
+            ? "border-ink/10 bg-white/90 shadow-[0_10px_30px_-24px_rgba(14,19,18,0.08)] backdrop-blur-xl"
+            : "border-transparent bg-white/80 backdrop-blur-md"
         }`}
       >
-        {/* Logo row */}
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
-          <Wordmark />
 
-          <div className="flex items-center gap-2">
-            <Link
-              href="/members"
-              className="hidden rounded-full border border-ink/15 px-5 py-2.5 text-sm font-semibold transition-colors hover:border-brand-400 hover:text-brand-700 sm:inline-flex"
-            >
-              Directory
-            </Link>
+
+        {/* Main header */}
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-2.5 sm:py-3">
+          <div className="flex-shrink-0">
+            <Wordmark />
+          </div>
+
+          {/* Desktop nav */}
+          <nav
+            className="hidden md:flex md:items-center md:gap-1"
+            aria-label="Main navigation"
+          >
+            <LayoutGroup>
+              {renderNavItems(primaryNav)}
+            </LayoutGroup>
+          </nav>
+
+          {/* Mobile actions */}
+          <div className="flex items-center gap-2 md:hidden">
+
             <Link
               href="/contact"
-              className="hidden rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-cream transition-all hover:bg-brand-700 md:inline-flex"
+              className="rounded-full border border-ink/15 bg-white px-4 py-2 text-sm font-semibold text-ink transition-colors hover:border-brand-700 hover:bg-brand-700 hover:text-white"
             >
               જોડાઓ
             </Link>
@@ -95,78 +124,64 @@ export default function SiteHeader() {
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Close menu" : "Open menu"}
-              className="grid h-11 w-11 place-items-center rounded-full border border-ink/12 bg-cream text-ink transition-colors hover:bg-sand lg:hidden"
+              className="grid h-11 w-11 place-items-center rounded-full border border-ink/12 bg-white text-ink transition-colors hover:bg-sand"
             >
               <Icon name={open ? "close" : "menu"} size={20} />
             </button>
           </div>
         </div>
 
-        {/* Module row — all thirteen modules, desktop */}
-        <div className="hidden border-t border-ink/8 lg:block">
-          <nav
-            className="mx-auto flex max-w-7xl items-stretch justify-between gap-1 px-4"
-            aria-label="Main"
-          >
-            {navLinks.map((link) => {
-              const active = isActive(link.href);
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`relative px-2.5 py-3 text-[15px] font-medium whitespace-nowrap transition-colors ${
-                    active
-                      ? "text-brand-700"
-                      : "text-ink/70 hover:text-ink"
-                  }`}
-                >
-                  {link.label}
-                  <span
-                    className={`absolute inset-x-2.5 bottom-1.5 h-0.5 origin-left bg-brand-600 transition-transform duration-300 ${
-                      active ? "scale-x-100" : "scale-x-0"
-                    }`}
-                  />
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
-
         {/* Mobile panel */}
         <div
           id="mobile-nav"
           hidden={!open}
-          className="border-t border-ink/10 bg-cream lg:hidden"
+          className="border-t border-ink/10 bg-white md:hidden"
         >
-          <nav
-            className="mx-auto grid max-w-7xl gap-1 px-4 py-4 sm:px-6"
-            aria-label="Mobile"
-          >
-            {navLinks.map((link) => {
-              const active = isActive(link.href);
+          <nav className="mx-auto grid max-w-7xl gap-1 px-4 py-4" aria-label="Mobile">
+            {primaryNav.map((item) => {
+              if ("children" in item) {
+                return (
+                  <details key={item.label} className="group">
+                    <summary className="flex items-center justify-between px-4 py-3 text-base font-medium text-ink/80 hover:bg-sand list-none">
+                      {item.label}
+                      <Icon name="chevron-down" size={16} className="ml-2 shrink-0 text-ink/50" />
+                    </summary>
+                    <div className="grid gap-1 px-4 pb-4">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className={`flex items-center justify-between px-4 py-3 text-base font-medium transition-colors ${
+                            isActive(child.href)
+                              ? "bg-brand-50 text-brand-700"
+                              : "text-ink/80 hover:bg-sand"
+                          }`}
+                        >
+                          <span>{child.label}</span>
+                          <span className="text-[11px] text-ink/40">{child.en}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </details>
+                );
+              }
               return (
                 <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium transition-colors ${
-                    active
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className={`flex items-center justify-between px-4 py-3 text-base font-medium transition-colors ${
+                    isActive(item.href)
                       ? "bg-brand-50 text-brand-700"
                       : "text-ink/80 hover:bg-sand"
                   }`}
                 >
-                  {link.label}
+                  {item.label}
                   <Icon name="arrow-right" size={17} />
                 </Link>
               );
             })}
-            <Link
-              href="/members"
-              className="mt-2 rounded-full bg-ink px-5 py-3 text-center text-sm font-semibold text-cream"
-            >
-              Member directory
-            </Link>
+
           </nav>
         </div>
       </div>

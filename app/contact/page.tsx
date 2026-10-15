@@ -14,46 +14,46 @@ export const metadata: Metadata = {
 const cards = [
   {
     icon: "map-pin" as const,
-    title: "Parivar Bhavan",
+    title: "પરિવાર ભવન",
     lines: site.address,
   },
   {
     icon: "mail" as const,
-    title: "Email",
-    lines: [site.email, "Replies within two working days"],
+    title: "ઈમેલ",
+    lines: [site.email, "બે કામકાજના દિવસમાં જવાબ"],
   },
   {
     icon: "phone" as const,
-    title: "Phone",
-    lines: [site.phone, "Mon–Sat, 10 AM to 7 PM"],
+    title: "ફોન",
+    lines: [site.phone, "સોમ-શનિ, સવારે ૧૦ થી સાંજે ૭"],
   },
   {
     icon: "users" as const,
-    title: "Your branch trustee",
+    title: "તમારા બ્રાન્ચ ટ્રસ્ટી",
     lines: [
-      "Rameshbhai · Surat & Ahmedabad",
-      "Mohanbhai · Rajkot & Pune",
-      "Dineshbhai · Mumbai & Bengaluru",
+      "રમેશભાઈ · સુરત અને અમદાવાદ",
+      "મોહનભાઈ · રાજકોટ અને પુણે",
+      "દિનેશભાઈ · મુંબઈ અને બેંગલુરુ",
     ],
   },
 ];
 
 const faqs = [
   {
-    q: "How do I add a new baby or a new marriage to the directory?",
-    a: "Send a note through this form with the name, date and branch. The entry goes live within a week and appears in the January print edition.",
+    q: "ડિરેક્ટરીમાં નવા બાળક અથવા નવા લગ્નની નોંધણી કેવી રીતે કરવી?",
+    a: "આ ફોર્મ દ્વારા નામ, તારીખ અને બ્રાન્ચ સાથે એક નોંધ મોકલો. એન્ટ્રી એક અઠવાડિયામાં ઓનલાઈન થઈ જશે અને જાન્યુઆરીની પ્રિન્ટ આવૃત્તિમાં દેખાશે.",
   },
   {
-    q: "Who can apply for a family scholarship?",
-    a: "Any child or grandchild of a registered member, from Class VI to post-graduation. Applications open every September and close on 31 October.",
+    q: "પરિવારની સ્કોલરશિપ માટે કોણ અરજી કરી શકે છે?",
+    a: "કોઈપણ નોંધાયેલ સભ્યના બાળકો અથવા પૌત્ર-પૌત્રીઓ, ધોરણ ૬ થી પોસ્ટ-ગ્રેજ્યુએશન સુધી. અરજીઓ દર સપ્ટેમ્બરમાં ખુલે છે અને ૩૧ ઓક્ટોબરે બંધ થાય છે.",
   },
   {
-    q: "Can I borrow the original ledger?",
-    a: "No — but every page has been photographed. Ask the archive team for a scan, or view the transcriptions kept with the trust.",
+    q: "શું હું અસલ ચોપડો ઉછીનો લઈ શકું?",
+    a: "ના — પરંતુ દરેક પાનાના ફોટોગ્રાફ્સ લેવામાં આવ્યા છે. સ્કેન માટે આર્કાઇવ ટીમનો સંપર્ક કરો, અથવા ટ્રસ્ટ પાસે રાખેલી નકલો જુઓ.",
   },
   {
-    q: "Is there a subscription to be part of the samast parivar?",
-    a: "No subscription. The trust runs on voluntary contributions at Diwali and Holi.",
+    q: "શું સમસ્ત પરિવારનો ભાગ બનવા માટે કોઈ વાર્ષિક લવાજમ છે?",
+    a: "કોઈ લવાજમ નથી. ટ્રસ્ટ દિવાળી અને હોળી પર સ્વેચ્છિક યોગદાનથી ચાલે છે.",
   },
 ];
 
@@ -61,8 +61,8 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
-        title="Write to the trust"
-        crumbs={[{ label: "Contact" }]}
+        title="ટ્રસ્ટને લખો"
+        crumbs={[{ label: "સંપર્ક" }]}
       />
 
       <PageSection>
@@ -92,22 +92,18 @@ export default function ContactPage() {
             </div>
 
             {/* Map placeholder */}
-            <div className="relative mt-6 overflow-hidden rounded-3xl border border-ink/10 bg-ink p-8 text-cream">
-              <div
-                aria-hidden
-                className="glow-dots absolute inset-0 opacity-30"
-              />
+            <div className="relative mt-6 overflow-hidden rounded-3xl border border-ink/10 bg-sand p-8 text-ink">
               <div className="relative">
-                <p className="text-[11px] font-semibold tracking-[0.18em] text-marigold-300 uppercase">
-                  {site.chapter}, Gujarat
+                <p className="text-[11px] font-semibold tracking-[0.18em] text-marigold-600 uppercase">
+                  ગુજરાત
                 </p>
                 <p className="mt-3 font-display text-2xl leading-snug font-semibold">
                   {site.name}
                 </p>
-                <p className="mt-2 text-sm text-cream/65">
+                <p className="mt-2 text-sm text-ink/65">
                   {site.address.join(", ")}
                 </p>
-                <p className="mt-5 text-xs text-cream/50">
+                <p className="mt-5 text-xs text-ink/50">
                   સ્થાપના : {site.founded} · {site.tagline}
                 </p>
               </div>
@@ -117,14 +113,13 @@ export default function ContactPage() {
           {/* Form */}
           <div className="rounded-3xl border border-ink/10 bg-sand/60 p-6 sm:p-8">
             <p className="text-[11px] font-semibold tracking-[0.24em] text-brand-700 uppercase">
-              Server action
+              સંપર્ક ફોર્મ
             </p>
             <h2 className="mt-3 font-display text-2xl font-semibold sm:text-3xl">
-              Send a note
+              અમને સંદેશો મોકલો
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              Submitted to a Next.js Server Action — validated on the server,
-              never in your browser alone.
+              નીચે આપેલ ફોર્મ ભરીને તમે ટ્રસ્ટનો સીધો સંપર્ક કરી શકો છો.
             </p>
             <div className="mt-7">
               <ContactForm />

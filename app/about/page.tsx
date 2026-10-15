@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { members, site, stats, timeline, values } from "@/lib/data";
 import { PageHero, PageSection, TextLink } from "@/components/page-hero";
 import { Icon } from "@/components/icon";
 import { MemberCard } from "@/components/member-card";
+import { TimelineCarousel } from "@/components/timeline-carousel";
 
 export const metadata: Metadata = {
   title: "Hamari Kahani — Our Story",
@@ -23,173 +25,246 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        title="A family that kept writing things down"
-        crumbs={[{ label: "Hamari Kahani" }]}
+        title="અમારો પરિચય"
+        crumbs={[{ label: "અમારો પરિચય" }]}
       />
 
-      {/* Story */}
-      <PageSection>
-        <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-16">
-          <div className="space-y-6 text-base leading-relaxed text-ink/80 sm:text-lg">
-            <p className="font-display text-2xl leading-snug font-semibold text-ink sm:text-3xl">
-              Bapaji used to say that a family which does not know its own
-              history will one day have to be introduced to itself.
-            </p>
-            <p>
-              Shri Bhikhabhai Kalidas Mangroliya was born in {site.familySince}{" "}
-              in the fields outside Mangrol. He kept no diary, but Savitriben Ba
-              kept everything else: births, marriages, the addresses of cousins
-              who left for the cities, the fees paid for whom. By the time the
-              ledger reached its third volume it was the family&rsquo;s most
-              valuable object — more than the house, more than the land.
-            </p>
-            <p>
-              Three brothers moved south through the seventies and eighties —
-              Ahmedabad, Rajkot, Mumbai — and the family scattered across
-              Gujarat and beyond. Every Diwali they came back. Every Diwali
-              somebody had a child nobody had heard of.
-            </p>
-            <p>
-              In {site.founded}, in a hall in {site.chapter}, the branches
-              agreed to stop relying on memory.{" "}
-              <strong className="font-semibold text-ink">
-                Samast Mangroliya Parivar
-              </strong>{" "}
-              — the whole family, all branches — was formally constituted, with
-              the emblem of joined hands and the ring of people that still
-              stands for us today.
-            </p>
-            <p>
-              What you are reading is the fourth volume of that ledger: searchable,
-              translatable, and available to a cousin in Bengaluru at three in
-              the morning. The cloth binding is gone. The habit is not.
-            </p>
-          </div>
-
-          <div className="grid gap-4">
-            <div className="overflow-hidden rounded-3xl border border-ink/10 bg-ink/5">
-              <Image
-                src="https://picsum.photos/seed/mangroliya-ledger/800/640"
-                alt="The family ledger photographed page by page"
-                width={800}
-                height={640}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="overflow-hidden rounded-3xl border border-ink/10 bg-ink/5">
-                <Image
-                  src="https://picsum.photos/seed/mangroliya-fields/500/500"
-                  alt="The fields outside Mangrol"
-                  width={500}
-                  height={500}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div className="grid place-items-center rounded-3xl bg-brand-700 p-6 text-center text-cream">
-                <span className="font-display text-5xl font-semibold">
-                  {site.founded}
-                </span>
-                <span className="mt-2 text-[11px] tracking-[0.18em] text-cream/70 uppercase">
-                  સ્થાપના · {site.chapter}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </PageSection>
-
-      {/* Values */}
-      <PageSection tone="sand" className="border-y border-ink/8">
-        
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {values.map((value, i) => (
-            <div
-              key={value.title}
-              className="rounded-3xl border border-ink/10 bg-cream p-6 transition-all hover:-translate-y-1 hover:border-brand-300"
-            >
-              <div className="flex items-center justify-between">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand-600 text-cream">
-                  <Icon name={value.icon} size={20} />
-                </span>
-                <span className="font-display text-3xl font-semibold text-ink/10">
-                  0{i + 1}
-                </span>
-              </div>
-              <h3 className="mt-5 font-display text-xl font-semibold">
-                {value.title}
-              </h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted">
-                {value.text}
-              </p>
-            </div>
-          ))}
-        </div>
-      </PageSection>
-
-      {/* Timeline */}
-      <PageSection>
-        
-        <ol className="mt-14 grid gap-8 lg:grid-cols-2">
-          {timeline.map((item, i) => (
-            <li
-              key={item.year}
-              className="group relative flex gap-6 rounded-3xl border border-ink/10 bg-cream p-6 transition-all hover:border-brand-300 hover:shadow-[0_26px_54px_-40px_rgba(14,19,18,0.6)]"
-            >
-              <div className="flex flex-col items-center">
-                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-ink font-display text-sm font-semibold text-marigold-300 transition-colors group-hover:bg-brand-700">
-                  {item.year}
-                </span>
-                {i < timeline.length - 1 && (
-                  <span
-                    aria-hidden
-                    className="mt-2 w-px flex-1 bg-linear-to-b from-ink/20 to-transparent"
-                  />
-                )}
-              </div>
-              <div>
-                <p className="text-[11px] font-semibold tracking-[0.18em] text-brand-700 uppercase">
-                  {String(i + 1).padStart(2, "0")} — Milestone
-                </p>
-                <h3 className="mt-2 font-display text-xl leading-snug font-semibold">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {item.text}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </PageSection>
-
-      {/* Trustees */}
-      <PageSection tone="sand" className="border-t border-ink/8">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+      <PageSection className="py-12 sm:py-20 bg-cream">
+        <div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16">
           
-          <TextLink href="/members">Meet everyone</TextLink>
-        </div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {trustees.map((slug) => {
-            const member = members.find((m) => m.slug === slug);
-            return member ? <MemberCard key={slug} member={member} /> : null;
-          })}
-        </div>
-
-        {/* Stats band */}
-        <div className="mt-16 grid grid-cols-2 gap-6 rounded-3xl bg-ink p-8 text-cream sm:p-10 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <p className="font-display text-4xl font-semibold text-marigold-300">
-                {stat.value}
-              </p>
-              <p className="mt-2 text-[11px] tracking-[0.16em] text-cream/55 uppercase">
-                {stat.label}
-              </p>
+          {/* Sidebar / Mobile Nav */}
+          <aside className="md:w-64 lg:w-72 shrink-0 sticky top-[61px] sm:top-[73px] md:top-28 z-30 self-start w-full">
+            <div className="bg-cream/95 md:bg-white/50 backdrop-blur-xl md:rounded-3xl py-3 md:p-6 md:border md:border-ink/5 md:shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] -mx-4 px-4 sm:mx-0 sm:px-0">
+              <h3 className="hidden md:block font-display font-bold text-ink text-lg mb-4">અમારો પરિચય</h3>
+              <nav className="flex flex-row md:flex-col gap-3 md:gap-1 md:border-l-2 md:border-brand-100 md:pl-4 overflow-x-auto no-scrollbar relative items-center md:items-start pb-2 md:pb-0">
+                <a href="#patidar-history" className="shrink-0 whitespace-nowrap rounded-full md:rounded-none bg-white md:bg-transparent px-5 py-2.5 md:px-0 md:py-2 text-[14px] md:text-[14.5px] text-ink hover:text-brand-700 font-semibold md:text-ink/70 transition-colors shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] md:shadow-none border border-ink/10 md:border-transparent">
+                  પાટીદાર પ્રજાનાં મૂળ અને કુળ
+                </a>
+                <a href="#kuldevi" className="shrink-0 whitespace-nowrap rounded-full md:rounded-none bg-white md:bg-transparent px-5 py-2.5 md:px-0 md:py-2 text-[14px] md:text-[14.5px] text-ink hover:text-brand-700 font-semibold md:text-ink/70 transition-colors shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] md:shadow-none border border-ink/10 md:border-transparent">
+                  કુળદેવી આઈ શ્રી ગૌરી સત્યાય
+                </a>
+                <a href="#sneh-milan" className="shrink-0 whitespace-nowrap rounded-full md:rounded-none bg-white md:bg-transparent px-5 py-2.5 md:px-0 md:py-2 text-[14px] md:text-[14.5px] text-ink hover:text-brand-700 font-semibold md:text-ink/70 transition-colors shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] md:shadow-none border border-ink/10 md:border-transparent">
+                  સ્નેહ મિલન સમારોહ
+                </a>
+              </nav>
             </div>
-          ))}
+          </aside>
+
+          {/* Main Content */}
+          <div className="flex-1 space-y-24 min-w-0">
+            
+            {/* Patidar History Section */}
+            <section id="patidar-history" className="scroll-mt-32 space-y-8 sm:space-y-12">
+              <div className="border-b border-ink/10 pb-6 sm:pb-8">
+                <h1 className="font-display text-2xl sm:text-4xl font-bold text-ink leading-tight mb-2 sm:mb-4">
+                  ગુજરાતની પાટીદાર પ્રજાનાં મૂળ અને કુળ
+                </h1>
+                <p className="text-brand-600 text-sm sm:text-base font-medium tracking-wide">
+                  ઐતિહાસિક સંદર્ભ અને ઉત્પત્તિ
+                </p>
+              </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૧. પાટીદાર પ્રજાનાં મૂળ અને કણબી શબ્દની ઉત્પત્તિ
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    ગુજરાત, સૌરાષ્ટ્ર, કચ્છ તથા ભારતના વિભીન્ન રાજયો અને વિશ્વના વિવિધ દેશોમાં પથરાયેલા પાટીદોરો, પટેલો કે કણબીઓનુ મુળ વતન ગુજરાત નથી. ઈતિહાસવિદો કહે છે કે વાયવ્ય દિશામાંથી ગુર્જરો સાથે કૂર્મિઓ પણ હિન્દુસ્તાનમાં આવ્યા. સંસ્કૃત શબ્દ કોશમાં "કુઅસ્ય અહિત ઈતિ કૃર્મિ". મતલબ કે જેની પાસે જમીન હોય તે કૂર્મિ. એનુ અપભ્રંશ કુનબી અથવા કણબી થયું. સં. કટુમ્બિન-કુહુમ્બી પરથી કણબી શબ્દ આવ્યો. કણમાંથી મણ પેદા કરનાર એ કણબી.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૨. આર્યોનું સ્થળાંતર અને લેઉવા-કડવા પાટીદારો
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    હજારો વર્ષ પૂર્વે આર્યો એશિયાખંડના પામીર નામના ઉચ્ચ પ્રદેશોમાં વસતા હતા. સમય જતાં સ્થાનાંન્તર કરીને એમની બે ટોળીઓ જુદી જુદી દિશામાં વહેચાઈ ગઈ. એક ઈરાન તરફ અને ત્યાંથી યુરોપના દેશોમાં અને બીજી મધ્યપૂર્વના દેશોમાં જઈ વસી. કાળક્રમે પામીર પ્રદેશોમાં વસનારી ટોળી ખૈબરઘાટ દ્વારા હિંદુકુળ પર્વતમાળા ઓળંગી સિંધુ નદીના પટમાં આવી ત્યાંથી ગંગા-યમુનાના ફળદ્રુપ મેદાનો અને પંજાબમાં આવીને વસવાટ કર્યો. અહીં આવીને કણબીઓએ ખેતીવાડી વિકસાવી. કણબીમાં પાછળથી ત્રણ તડાં થયાં. લેઉવા, કડવા અને આંજણા. લેઉવામાં હાલારી, ગોહિલવાડી, તારકઢા એવી પેટા જ્ઞાતીઓ છે. હરગોવિંદદાસ કાંટાવાળા લખે છે કે લેઉવા પાટીદારના વહીવંચા બારોટોની 'વહી' બોલે છે કે લેઉવા લોહગઢથી સવંત ૭૦૨ ની સાલમાં ગુજરાતમાં આવીને વસ્યા. લવનો વંશજ લેઉવા અને કુશના વંશજ કડવા એવી એક પૌરાણીક માન્યતા પણ પ્રચલિત છે.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૩. લેઉવા અને કડવા પાટીદારોની ઉત્પત્તિ
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    ઈતિહાસનાં પાના બોલે છે કે કૂર્મિઓ-કણબીઓએ પોતાના મુળવતન લેયા અને કરડ પ્રાંતનુ નામ જાળવી રાખવા લેયાપ્રાંત વાળાઓએ પોતાને કડવા તરીકે ઓળખાવ્યા, તેઓ ગુજરાતમાં આવ્યા ત્યાં સુધી લગ્ન ક્રિયાઓમાં બંને વચ્ચે કોઈ ભેદ ન હતો. ત્યાર પછી લગ્નાદિ વ્યવહારમાં લેઉવાઓ સાવ જુદા પડી ગયા એમ 'લેઉવા કણબીઓ' શ્રી ગોરધનદાસ સોરઠીયા લખે છે.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૪. પાટીદારોનું ગોત્ર અને અન્ય પ્રદેશોમાં કણબી સમાજ
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    લેઉવા અને કડવા પાટીદારોનું ગોત્ર કશ્યપ ગણાય છે. મહર્ષિ કશ્યપ મહાન વિચારક, વિદ્વાન, વૈજ્ઞાનિક, કવિ, કલાકાર અને કુશળ કિશાન હતા. એમણે ઋગ્વેદના પ્રથમ મંડળ, સૂકત ૯૯ ની રચના કરી હતી, પાટીદારો આ કૃશક, કશ્યપ ઋષિના કૂર્મિવંશી ક્ષત્રિય કહેવાય છે. આ કણબી પાટીદારો ભારતભરમાં પથરાયેલા જોવા મળે છે. કૃર્મિ, કુનબી, કુંબી, એક જ જ્ઞાતિના રૂપાંતરિત નામો છે. ઉત્તર ભારત અને મધ્યપ્રદેશમાં કુનબી, મહારાષ્ટ્રમાં પાટીલ, તામીલનાડુમાં કામ્યુસે, નાયડુ કે રેડ્ડી બધા એક જ સમાજના હોવાનું જહોન વિલિયમ માને છે. સ્ટોરી ઓફ બારડોલીમાં શ્રી મહાદેવભાઈ દેસાઈએ કણબીના કડવા, લેઉવા, મતિયાભકત, ઉદાપાટીદાર અને ચરોતરીયા એમ પાંચ તડાંનો ઉલ્લેખ કર્યો છે.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૫. સૌરાષ્ટ્રમાં કૂર્મિઓનું આગમન અને પાટીદારોની વસાહત
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    ઈતિહાસના ઓવારે ઊભા રહીને ભુતકાળ ભણી નજર નોંધીશું તો જણાય છે કે કૃર્મિઓ ઈ.સ. પુર્વે ૩૦૦ ના અરસામાં ચંદ્રગુપ્ત મૌર્યના સમયમાં સૌરાષ્ટ્રમાં પ્રવેશ્યા હતા. તેઓ પંજાબ, સિંધ, કચ્છ, રાજસ્થાન, અને રાધનપુર એમ જુદા જુદા માર્ગે સૌરાષ્ટ્રમાં આવીને સ્થિર થયા છે એમ વિદ્વાનો માને છે. ત્યાર પછી ૧૨મી સદીમાં સિદ્ધરાજ જયસિંહના શાસન દરમ્યાન ગંગા-જમનાના દોઆબમાંથી ૧૮૦૦ જેટલા પાટિદાર પરિવાર ગુજરાતમાં આવીને સ્થાયી થયા. પ્રથમ એમની વસાહત પાટણ બની ઈ.સ. ૧૧૧૦ના અરસામાં રામજી પટેલ નામની પ્રભાવશાળી વ્યકિતએ પાટણથી અડાલજ આવીને છસો લેઉવા પટેલોને અહીં વસાવ્યા. તેઓ સિદ્ધરાજના મંત્રીમંડળમાં મહત્વનુ સ્થાન શોભાવતા હતા. તેમણે અડાલજમાં લેઉવા પટેલોના કુળદેવી અન્નપુર્ણાના મંદિરની પ્રતિષ્ઠા કરી. કડવા પાટીદારોએ ઊંઝામાં પોતાનાં કુળદેવી ઉમિયા માતાજીનું મંદિર બનાવ્યું.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૬. પાટીદાર શબ્દની ઉત્પત્તિ અને મહેસૂલના ઇજારા
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    ખેડા જીલ્લાના પીપળાવ ગામના વીર વસનદાસે મોગલ બાદશાહ અને ગુજરાતના સૂબાઓની વગથી મહેસુલ ઉઘરાવવાના ઈજારા પાટીદારોને આપ્યા હતા. આ ઈજારા મેળવનાર ચરોત્તરના પાટીદારો પાછળથી અમીન અને દેસાઈના નામે ઓળખાયા. સને ૧૭૦૩ મા પીપળાવમાં યોજાયેલા ખાસ સમારંભમાં મોગલ બાદશાહ ઔરંગઝેબનો શાહજાદો બહાદુરશાહ ખાસ હાજર રહ્યો હતો. ત્યારે સરકારી દફતરે કણબીના બદલે 'પાટીદાર' શબ્દનો કાયમી હુકમ કરાવ્યો હતો. એ જમાનામાં ખેતી કરનાર ખેડુત કહેવાતા. જમીનના ટુકડા(ખેતર)ના માલિકને પત્તીદાર 'કહેવાતો.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૭. પટેલ શબ્દની ઉત્પત્તિ અને તેનો અર્થ
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    કાઠિયાવાડના કણબી 'કણબી પટેલ' તરીકે ઓળખાય છે. પટેલ એ કોઈ જ્ઞાતિ કે સમાજ નથી. એ તો કણબી જ્ઞાતિના અમુક લોકોને મળેલો ઈલ્કાબ છે. મહંમદ બેગડાએ ગુજરાતમાં ખેતીના વિકાસ માટે એકેક ગામનો કબજો, પસંદ કરીને એને આબાદ કરવાની શરતે કણબીઓને આપેલો. આ હોદ્દો ધરાવનાર સૌથી વધુ કણબીઓ હતા. કાયદો અને વ્યવસ્થા સંબંધી રાજયને તેઓ અહેવાલ આપતા. આ હોદ્દો પછી પટેલમાં ફેરવાઈ ગયો. આ રીતે જોઈએ તો પાટીદાર શબ્દ ધંધા પરથી આવ્યો છે, જયારે પટેલ શબ્દ ખિતાબ કે પદવી પરથી આવ્યો છે. સમય જતા પાટીદાર શબ્દ લખવામાં અટપટો લાગતાં તેને પટેલ શબ્દમાં પટલાઈ ફૂટવાની માનસિક ખુમારી અને શૂરાતનો ભાવ છૂપાયેલો હોવાથી લેઉવા-કડવા સમગ્ર પાટીદાર કોમે પટેલ શબ્દ અપનાવી લીધો છે.<br /><br />
+                    પટેલ શબ્દનું મૂળ તપાસીએ તો સંસ્કૃત 'પટટલિક' શબ્દ છે. ગામના ખેતરોની જમીન અને ઘરથાળની જમીનોના જે વેચાણ કે ગીરો દસ્તાવેજ-લખાણો થતાં તેની એક નકલ સાચવવાનું કામ રાજાઓએ પ્રામાણીક હોવાથી કણબીઓને સોપેલું. આથી પટટલિક શબ્દ પરથી પટેલ શબ્દ અસ્તિત્વમાં આવ્યો. એનું કારણ એવું જણાય છે. કે દસ્તાવેજો કે લેખો, પટટાઓ (પટટ-વસ્ત્ર) ઉપર લખાયેલા આગેવાન પટટલિકો પાસે રહેતા હતા આમ સેંકડો વર્ષથી 'પટેલ' શબ્દ ગામના આગેવાન તરીકે વપરાતો આવ્યો છે. 'પાટી’ એટલે જમીનનો ટુકડો, એનો માલિક 'પટટીદાર' કહેવાતો. એનું અપભ્રંસ થઈને પાટીદાર શબ્દ આવ્યો. આમ પટેલ એ કોઈ જ્ઞાતિ કે અટક સંદર્ભે નથી પણ માનવવાચક ઉપનામ છે. આ હોદો પછી પટેલમાં ફેરવાઈ ગયો, અને કણબીની આખી નાત પટેલોના નામે જાણીતી થઈ. આ પટેલ ખૂબ મહેનતુ પ્રજા. કણમાંથી મણ અનાજ પેદા કરે. એથી એના હાથ સોનાના કહેવાતા. આથી દિલ્હીના બાદશાહે એકવાર કહેલું કે 'અમારા રાજયમાં તો જુવાર-બાજરી પાકે છે પણ ગુજરાતના સુલતાનોને ઘેર તો મોતી પાકે છે.'
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૮. ઐતિહાસિક પટેલો: વાછા પટેલ, અજુ પટેલ અને ઉદયકર્ણજી
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    સંવત ૧૨૨૪માં વાછા પટેલે વસો વસાવ્યું. અકબરના વખતમાં અજુ પટેલ થયા. તેની સાથે અકબર બાદશાહને ભારે ભાઈબંધી. અકબર ગાદીએ આવ્યા બાદ અજુ પટેલને દિલ્હી બોલીવી સં. ૧૬૪૧માં ગુજરાત તરફનું કામ સોંપી ૯ શણગારેલા હાથી, ૧૩ ગામ અને ૨૪ હજારની નિમણૂક બાંધી આપી. વિરમગામમાં ૧૭મા સૈકામાં ઉદયકર્ણજી થયા. એમણે વિરમગામ ફરતો મજબુત કિલ્લો અને રાજગઢી બંધાવ્યા, એમ પ્રભુની ફૂલવાડીમાં શંભુભાઈ બોરક નોંધે છે.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૯. સૌરાષ્ટ્રમાં પાટીદારોનું સ્થળાંતર અને હાલારની વસાહત
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    એ પછી પરિસ્થિતિ પલટાઈ. અંધાધુંધીનો યુગ આરંભાયો. અલ્લાઉદ્દીને કરણઘેલાને હરાવ્યો. મુસલમાન સૈન્યે ગુજરાતને લુટવા-બાળવા માંડયું. ખેતીનો શાંત ધંધો કરનાર કણબી-પટેલોથી વસેલાં આબાદ ગામડાં ભાંગવા માંડયા. પ્રજા સલામતી માટે જયાં ત્યાં નાસવા માંડી. એ વખતે કાઠિયાવાડના રાજવીઓ ગુજરાતના પાટિદારોની ખેતી-ખંત જાણતા હતા. આથી એમણે પોતાના ગામો આબાદ કરવા માટે પટેલોને 'પળત' આપી રાજમાં વસાવવા માંડયા. એમાં જામનગરના રાજવી જામરાવળ અગ્રણી રહ્યા. સવંત ૧૫૮ર માં ભાદા ઠુંમર અને પુજા ભંડારીને ખેડુતોના મોટા સમુહ સાથે પોતાના રાજય-હાલારમાં ઉતાર્યા. પીપર-ભાડુકિકયામાં એક સાથે પટેલોના ૭૫૦ ઉચાળા અંટાળીયા મહાદેવના મંદિરના ભીચિત્રો ઊતાર્યા હતા. એમાથી કંઈક હાલારમાં રહ્ય ધોરાજી તરફના ગામોમાં ગયા. ત્યાં નવા ગામોના તોરણ બાંધી કાઠીયાવાડનો મુલક આબાદ કરવા માંડયા. સવંત ૧૮૬૯માં હાલારમાં મોટો દુષ્કાળ પડયો, એ 'કોતડીના કાળ' તરીકે જાણીતો છે કાઠી પ્રજાનો મુલક રાજપુતોએ જીતી લેતા કાઠીઓ બહારવટે ચડવા ને ખેડુતોને રંજાડવા લાગ્યા. અમરેલી વગેરે વિસ્તારો એક કાળે કણબી ખેડુતની વસતી વગરના થઈ ગયા. ત્યાર પછી ગાયકવાડી હકુમત આવતા થોડી શાંતી સ્થપાઈ એમ ગોરધનદાસ સોરઠીયા નોંધે છે. એ પાછુ સાવરના વાલા પટેલે સમાજના સહકારથી અંટાળીયા મહાદેવનુ મંદિર બનાવ્યું. જે આજે પાટીદારોનું તીર્થસ્થાન ગણાય છે.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૧૦. પાટીદાર અટકોની ઉત્પત્તિ
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    એ પછી રજવાડાના સહકારથી સમયાંન્તરે અન્ય પ્રદેશોમાંથી પાટીદોરો સૌરાષ્ટ્રમાં આવીને વસ્યા. આ કુટુંબોએ વહાલા વતનની યાદી જાળવી ઓળખવા પોતાના ગામો ઉપરથી અટકો રાખી. ઉ.ત. વસો ઉપરથી વસોયા, ગુર્જરા ઉપરથી ગજેરા, સોજીત્રા ઉપરથી સોજીત્રા, સાવલી ઉપરથી સાવલીયા, લીંબાશી ઉપરથી લીંબાસીયા, વઘાશી ઉપરથી વઘાસિયા, વણસોલ ઉપરથી વણસોલિયા, માંઘરોલી ઉપરથી માંગરોળીયા, તારાપર ઉપરથી તારપરા, તરણોલ ઉપરથી તરણોલી, ધમેલી ઉપરથી ધામેલિયા, કોઠી ઉપરથી કોઠિયા, બોરસદ ઉપરથી બોરસદિયા, ફિણાવ ઉપરથી ફિણાળિયા, સિદ્ધપુર ઉપરથી સિદ્ધપરા, માંડલ ઉપરથી માંડલિયા, સિંગાલી ઉપરથી શીંગાળા, હીરાપરા ઉપરથી હિરપરા, પાદરા પરથી પાદરિયા તરીકે ઓળખાયા.<br /><br />
+                    પછીથી કાળક્રમે એમની અટકો બદલાવવા માંડી. કાઠીયાવાડના ગામો ઉપરથી અને એમના વડવાઓના નામો ઉપરથી અટકો આવી. ઉ.ત. ગોંડલ પરથી ગોંડલીયા રાણપર પરથી રાણપરિયા, સરધાર પરથી સરપરા, છોડવડી પરથી છોડવડીયા, રૈયા પટેલના વંશજો રૈયાણી, કાના પટેલના વંશજો કાનાણી જાગા પટેલના વંશજો જાગાણી, અને ભાદા પટેલની પેઢીઓ ભાદાણી તરીકે ઓળખાણી. જેઓ પ્રથમ હાલારમાં ઉતર્યા તેઓ હાલારી લેઉવા પટેલ કહેવાણા. જે કુટુંબો સીધા ગોહિલવાડમાં આવ્યા તે ગોહિલવાડી(ઘોલવાડી) લેઉવા ગણાયા. પટેલોમાં સૌથી મોટી સંખ્યા હાલારી લેઉવાની હોવાનુ મનાય છે.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૧૧. કડવા પાટીદારો અને ઉમિયા માતાજી
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    વનરાજ ચાવડાના વખતમાં ઊંજાની આસપાસના કડવા કણબીઓના સ્થળાંતરને કારણે ફળદ્રુપ જમીન વેરાન થવા માંડી. આથી ઉમિયા માતાના મંદિરાના પુજારીને પાટણ બોલાવી સન્માન કરી રાજયાશ્રય આપ્યો. માતાજીનો ઉત્સવ ઉજવાયો ને કડવા પાટીદારો ધીમે ધીમે ઉત્તર ગુજરાતમાં આવી સ્થાવી થયા. તેઓ આજેય પોતાના કુળદેવી ઉમિયા માતાને પુજે છે.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-brand-700">
+                    ૧૨. આંજણા પટેલો, ચૌધરી અને મુમના સમાજ
+                  </h2>
+                  <p className="text-ink/80 leading-loose text-[16px] sm:text-[17px]">
+                    લેઉવા-કડવા ઉપરાંત ઉ.ગુજરાતમાં ત્રીજા તડાના આંજણા પટેલો પણ છે. કેટલાક એને સહસ્ત્રાર્જુનના વંશજ કહે છે તો કોઈ એમને અંજનીપુત્ર ગણે છે. પરશુરામના પ્રહારથી બચવા અજાણ્યા થઈને જે રહ્યા તે આંજણા—-ચૌધરી પાટીદારો રાજવંશી પ્રજા છે. ચૌધરી એ ક્રોમ નથી પણ તેમનો ઈલ્કાબ છે. બોમ્બે ગેઝેટીયર લખે છે કે આંજણા કણબીઓ કરતા રાજપુતોને વધુ મળતા આવે છે.તેના જેવી જ પાઘડી પહેરે છે અને અટક પાછળ સિંહ લગાડે છે. જયારે ૧૫મી સદીમાં શાહ આલમના સમયમાં જે લેઉવા કણબી વટલાયા અને મુસ્લિમ ધર્મ સ્વીકાર્યો તે મુમના તરીકે ઓળખાયા. એમ 'કાઠીયાવાડના મુમના' પુસ્તકમાં નોંધાયુ છે. આજે પણ તેઓ કાનાણી, ભીમાણી, કોટડીયા, સોરઠીયા તરીકેની અટકથી ઓળખાય છે. સૌરાષ્ટ્ર અને ઉ. ગુજરાતમાં વસે છે.
+                  </p>
+                </div>
+                
+            </section>
+
+            {/* Kuldevi Story Section */}
+            <section id="kuldevi" className="scroll-mt-32">
+              <h2 className="font-display text-2xl leading-snug font-bold text-ink sm:text-3xl text-center mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-ink/10">
+                માંગરોળીયા પરિવારના કુળદેવી આઈ શ્રી ગૌરી સત્યાય માતાજી
+              </h2>
+              
+              <div className="space-y-6 text-base leading-relaxed text-ink/80 sm:text-lg">
+                  <div className="float-left w-full sm:w-72 md:w-96 mr-0 sm:mr-8 mb-6 sm:mb-4 rounded-xl overflow-hidden border border-ink/5">
+                    <Image
+                      src="/satyaymaa.webp"
+                      alt="માંગરોળીયા પરિવારના કુળદેવી આઈ શ્રી ગૌરી સત્યાય માતાજી"
+                      width={500}
+                      height={700}
+                      className="w-full h-auto object-contain"
+                    />
+                  </div>
+
+                  <p>
+                    સૌરાષ્ટ્રની સતિ અને સંત તેમજ નિઃસ્વાર્થી માનવીની પવિત્ર તીર્થ ક્ષેત્ર ભૂમિમાં,
+                    આશરે રર૩ વર્ષ પૂર્વે (પહેલા) માંગરોળીયા પરિવારમાં ધર્મનિષ્ઠ પતિ-પત્નિ ખેતી કામ કરી પોતાનું જીવન ગુજારતા હતા. કર્મ પ્રમાણે જીવન જયોત જલતી રહે છે. પૂર્વના કર્મો પુરા થતા જીવન જયોત બુજાય જાય છે. માંગરોળીયા પરિવારના પુરુષનું અકાળે અવસાન થયું. પોતાના ધર્મ પત્નિ ઉપર ભારે દુ:ખ આવી પડયું. ગુલાબના પુષ્પ જેવી તેજસ્વી બાળકી ખોળામાં રમતી હતી.
+                  </p>
+                  <p>
+                    ભારતીય સંસ્કૃતિની દિવ્ય જયોતી જેમની અંતર ગુહામાં સ્વયં પ્રકાશ સ્વરૂપે અખંડ તેજ પાથરી રહી છે. વિધવા દીકરીના માતાપિતા ચિંતાતુર બન્યા. યુવાન દીકરી તેની જીંદગી કેમ વિતાવશે. તેમને સારુ સંસ્કારી કુટુંબ મેળવી પુર્ન લગ્ન કરી તેમનું જીવન સુખી થાય તેમ કરવું જોઈએ.
+                  </p>
+                  <p>
+                    અમરેલી જીલ્લામાં ધારી તાલુકાના ચલાલા બાજુના મીઠાપુર ગામના સુસંસ્કારી દુધાત અટકના પટેલ કુળવાન કુટુંબમાં સંબંધ કરી પુર્ન લગ્ન કર્યા અને ગુલાબના પુષ્પ જેવી દીકરીને પણ સાથે આંગળીએ લાવવા પટેલે આગ્રહ કર્યો. આ દીકરી મારી દીકરી છે. તેમને હું દુઃખી થવા દઈશ નહીં. પાલક પિતા તરીકે ધામધુમથી લગ્ન કરીશ અને સુસંસ્કારો આપી દીકરીને સારુ કરીયાવર કરીશ આવો કોલ આપી મીઠાપુરના પટેલ દીકરીને (આંગળીએ) સાથે લઈ ગયા.
+                  </p>
+                  <p>
+                    દિવ્ય જયોતી જેની આંતર ગુહામાં સ્વયં પ્રકાશ રૂપે અખંડ તેજ પાથરી રહી છે તે ગુલાબના પુષ્પ જેવી દીકરી પાલક પિતાને ત્યાં મોટી થવા લાગી. લગ્ન સમય થતા તેમણે પોતાની અટકના આધારે સારા સુસંસ્કારી માંગરોળીયા પરિવારમાં સંબંધ કર્યો (ગામની યાદી મળી નથી). લગ્ન નકકી કર્યા, લગ્નની તૈયારીઓ કરી વાજતે ગાજતે જાન આવી ધામધુમથી સામૈયા કર્યા. મહેમાનોનું ભાવ ભર્યુ સ્વાગત કર્યુ.
+                  </p>
+                  <p>
+                    સંપૂર્ણ શાસ્ત્રોકત વિધિ પ્રમાણે લગ્ન કર્યા. સુવાસિનિ બહેનોના મધુર ગીતોનાં ગુંજન સાથે ચાર મંગળ ફેરા વરત્યા. દીકરીને સાસરીએ વળાવવા પાલક પિતા અને માતાએ આંનદ ભીની આંખડીએ વિદાય આપી. જે ઘરના ઉંબરામાં દીકરી રમીને મોટી થઈ હોય, સાસરે જવાના વળામણા થાય ત્યારે તે ઉબરુ દીકરીને પહાડ જેવુ લાગે, પણ સુસંસ્કારી દીકરી બે ઘરની આબરૂ વધારે છે પિતાની અને સસરાની.
+                  </p>
+                  <p>
+                    મીઠાપુરથી જાનને ધામધુમથી વળામણા કર્યા તે વખતે રસ્તાની વ્યવસ્થા સારી ન હતી. ખેતરાવ રસ્તા હતા. બપોરનો સમય થવા આવ્યો હતો. બપોરા કરવાનો વિચાર કર્યો સારુ સ્થળ આવે તો ગાડા છોડી ટીમણ (નાસ્તો) કરીએ.
+                  </p>
+                  <p>
+                    અમરેલીથી ૧૩ કિલોમીટર શેત્રુજી નદીના કાંઠે ખારાપાટનું સુંદર સંસ્કારી પીઠવાજાળ ગામ આવેલ છે. ગામને ગોંદરે લીમડા અને પવિત્ર ખીજડાના ઝાડની ઘટાટોપ છાંયા જોઈને જાન વિસામો લેવા ગાડા છોડયા. ગામના આગેવાન આવ્યા. પાણી અને બુંગણ વિગેરે વ્યવસ્થા કરી આપી. સુખડીના ભાતા છોડી નાસ્તા કર્યા. બેનો લગ્ન ગીતો ગાવા લાગ્યા. તે જમાનામાં ગીતમાં સાસરીયા અને પીયરીયાનો અટકનો સંબંધ સુચવે છે. કન્યા કયા કુળના છે અને વરરાજા કયા કુળના છે તે જાણી શકાતુ. દીકરીના પાલક પિતાએ પોતાની અટકના આધારે માંગરોળીયા કુળની દીકરીનો સંબંધ માંગરોળીયા કુળમાં કર્યો. તે ગીતોનાં શબ્દો કન્યાના હૃદયમાં ઉતરી ગયા. પોતાના મુળ પિતાની અટક યાદ આવી ગઈ અત્યંત દુઃખ થયું. સાગોત્રી સંબંધ કુળ ઘાતક છે. હું જે કુળમાં જન્મી છું તે કુળની પુત્રવધુ નહિ બનું. ત્યારે તેના લાડકવાયા દેરે મશ્કરી કરી કે એવી સતવાદી હો તો સતિ થઈ જા.
+                  </p>
+                  <p>
+                    ઈશ્વરને મનોમન પ્રાર્થના કરી અને અંતર આત્મા જાગૃત થયો. હે દેવ આ અઘટિત કાર્ય મને યોગ્ય નથી. ચેતન વંત આત્મ ચેતી જા તુ મને મેળવી લે. તે સમય 'વિ' સંવત ૧૮૨૩ ના મહામાસ શુકલ પક્ષ હતો. જોત જોતામાં સતિત્વ પ્રગટ થયું. દશેય આંગળીઓમાં સ્વયં અગ્નિ પ્રગટ થયો. અગ્નિ રૂપ ધારણ કર્યુ.
+                  </p>
+                  <p>
+                    જાનમાં આવેલા માંગરોળીયા પરિવારના ભાઈઓ અને બહેનો પ્રાર્થના કરવા લાગ્યા. માતાજી અમારી મોટી ભુલ થઈ છે. માફ કરો અમને આશિર્વાદ આપો ત્યારે સતિ આઈ માતાજીએ અગ્નિ સ્વરૂપ સંપૂર્ણ ધારણ કર્યુ હતુ. માતાજીએ વચન આપ્યુ કે માંગરોળીયા પરિવારની રક્ષા કરીશ પણ દીકરાના લગ્ન થયા પછી છેડા છેડી મિંઢોળ મારા સ્થળ ઉપર છોડવા અને ગૃહઃસ્થાશ્રમમાં પ્રવેશ કરવો. આ સ્થળ ઉપર માંગરોળીયા પરિવારે મારી અહિંયા સ્થાપના કરવી દુઃખીયાના દુઃખ ભાંગીશ, આંધળાને આંખો આપીશ. અંગ ભંગ દુઃખીયાને અંગ આપીશ પણ સાચા ભાવથી ટેક લઈ માનતા કરવી. અંગ સારૂ થાય ત્યારે પવિત્ર કાષ્ટમાંથી અંગ બનાવી મારા ચરણે ધરવું. નિ:સંતાન પરિવારને બાળકો આપીશ. પારણા બંધાવીશ કોઈને પણ આંખમાં જોકો વાગે ત્યારે મારુ સ્મરણ કરવાથી જોકો ઉતરશે. શ્રધ્ધાળુ ભાઈ-બહેનો માનતા ધરવા પગપાળા દૂરથી ચાલીને આવે છે.
+                  </p>
+                  <p>
+                    ચાંદો અને સુર્ય તપશે ત્યાં સુધી માંગરોળીયા કુળની હું રક્ષા કરીશ. મારા કુંટુંબમાં કોઈને સર્પ ડંશ નહિ થાય. આ પ્રમાણેના વચનો આપી પીઠવાજાળના ગોંદરે કાયમ ના માટે સતિ આઈ માતાજીએ નિવાસ કર્યો. પંચ મહાભૂતની કાયા પીઠવાજાળની પવિત્ર ધરતિમાં મળી ગઈ.
+                  </p>
+                  <p>
+                    પોતાનું પવિત્ર તેજ ત્યાં સદાના માટે ઝળ હળી રહ્યું છે. તેના પતિ પણ તેમના સાથે સ્વર્ગે સિધાવ્યા. તે બંન્નેના પાળીયા આજે મોજુદ છે. આ વાતને ૨૨૩ વર્ષ વિતી ગયા છે. આજે પાળીયા ઉપર મંદિર બન્યું છે.
+                  </p>
+              </div>
+            </section>
+            
+            {/* Sneh Milan Section */}
+            <section id="sneh-milan" className="scroll-mt-32">
+              <h2 className="font-display text-2xl leading-snug font-bold text-ink sm:text-3xl text-center mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-ink/10">
+                સ્નેહ મિલન સમારોહની શરૂઆત કેવી રીતે થઈ
+              </h2>
+              
+              <div className="space-y-6 text-base leading-relaxed text-ink/80 sm:text-lg">
+                <div className="float-right w-full sm:w-80 md:w-[400px] ml-0 sm:ml-8 mb-6 sm:mb-4 rounded-xl overflow-hidden border border-ink/5 shadow-sm">
+                  <Image
+                    src="/snehmilan.jpg"
+                    alt="માંગરોળીયા પરિવાર સ્નેહ મિલન સમારોહ"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+
+                <p>
+                  માંગરોળીયા પરિવારના પ્રથમ સ્નેહ મિલન સમારોહની શરૂઆત આજથી ૩૬ વર્ષ પહેલાં થઈ હતી. પરિવારના વડીલો અને અગ્રણીઓએ સૌને એક છત નીચે લાવવાનો વિચાર કર્યો હતો. આ નાનકડી શરૂઆત આજે એક વિશાળ વટવૃક્ષ બની ગઈ છે. શરૂઆતના વર્ષોમાં માત્ર ગણતરીના પરિવારો જ આ સમારોહમાં હાજરી આપતા હતા, પરંતુ આજે દર વર્ષે હજારો સભ્યો ભેગા મળીને આ સમારોહને હર્ષોલ્લાસથી ઉજવે છે.
+                </p>
+                <p>
+                  વર્ષોથી ચાલતી આવતી આ પરંપરા પરિવારના સભ્યો વચ્ચે પ્રેમ, એકતા અને ભાઈચારો જાળવી રાખવાનું એક અદ્ભુત માધ્યમ બની છે. સમારોહનો મુખ્ય હેતુ પરિવારના યુવાનો અને નવી પેઢીને પોતાના મૂળ, સંસ્કૃતિ અને વડીલોના સંસ્કારો સાથે જોડી રાખવાનો છે. આજના ઝડપી યુગમાં જ્યાં લોકો એકબીજાથી દૂર થતા જાય છે, ત્યાં આ સ્નેહ મિલન એકતાનું પ્રતીક બની રહ્યું છે.
+                </p>
+                <p>
+                  સ્નેહ મિલન સમારોહમાં દર વર્ષે વિવિધ કાર્યક્રમોનું આયોજન કરવામાં આવે છે. યુવાનો અને વડીલો સાથે મળીને સાંસ્કૃતિક કાર્યક્રમો રજૂ કરે છે. શિક્ષણ, રમતગમત અને અન્ય ક્ષેત્રોમાં સિદ્ધિ પ્રાપ્ત કરનાર પરિવારના તેજસ્વી તારલાઓનું સન્માન કરવામાં આવે છે. આ ઉપરાંત, ભોજન સમારંભ દ્વારા સૌ એકબીજા સાથે વાર્તાલાપ કરવાનો અને નવા સંબંધો બાંધવાનો આનંદ માણે છે. આ સ્નેહ મિલન માત્ર એક ઉત્સવ નથી, પરંતુ માંગરોળીયા પરિવારના મૂળિયાંને સિંચવાનું અને ભવિષ્યની પેઢીને માર્ગદર્શન આપવાનું એક મહત્ત્વપૂર્ણ કાર્ય છે.
+                </p>
+
+                <TimelineCarousel />
+              </div>
+            </section>
+            
+          </div>
         </div>
       </PageSection>
+
     </>
   );
 }

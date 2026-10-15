@@ -1,36 +1,44 @@
 @import "tailwindcss";
 
 @theme {
-  /* ---- Palette: Inverted to White Theme ---- */
-  --color-cream: #0e1312;
-  --color-sand: #1a2422;
-  --color-shell: #2a3431;
-  --color-ink: #ffffff;
-  --color-ink-soft: #fbf8f3;
-  --color-muted: #6b7773;
+  /* ---- Palette: Maroon & gold heritage theme ---- */
+  --color-cream: #fffdf7;
+  --color-sand: #fff8e7;
+  --color-shell: #f3e7cf;
+  --color-line: #eadfcb;
+  --color-ink: #1a1111;
+  --color-ink-soft: #483c3c;
+  --color-muted: #6b5c4e;
 
-  --color-brand-50: #eef4ff;
-  --color-brand-100: #dbe7ff;
-  --color-brand-200: #bcd3ff;
-  --color-brand-300: #90b7ff;
-  --color-brand-400: #5a90fb;
-  --color-brand-500: #2f6ff0;
-  --color-brand-600: #1a56d9;
-  --color-brand-700: #1546b4;
-  --color-brand-800: #13398f;
-  --color-brand-900: #123072;
-  --color-brand-950: #0b1c44;
+  /* Royal Blue to Deep Navy (derived from logo) */
+  --color-brand-50: #f0f5ff;
+  --color-brand-100: #e5edff;
+  --color-brand-200: #cddbfe;
+  --color-brand-300: #a4beff;
+  --color-brand-400: #7698ff;
+  --color-brand-500: #476bff;
+  --color-brand-600: #2441f3;
+  --color-brand-700: #172fd4;
+  --color-brand-800: #1527ab;
+  --color-brand-900: #152686; /* Matches the dark navy text */
+  --color-brand-950: #101754;
 
-  --color-marigold-200: #ffe0e2;
-  --color-marigold-300: #ffbfc4;
-  --color-marigold-400: #ff8f97;
-  --color-marigold-500: #f5333f;
-  --color-marigold-600: #c11720;
+  /* Bright Red (derived from logo's outer ring) */
+  --color-marigold-50: #fff0f0;
+  --color-marigold-100: #ffe3e3;
+  --color-marigold-200: #ffcaca;
+  --color-marigold-300: #ffa1a1;
+  --color-marigold-400: #ff6868;
+  --color-marigold-500: #e60000;
+  --color-marigold-600: #d91414;
+  --color-marigold-700: #b60b0b;
+  --color-marigold-800: #960e0e;
+  --color-marigold-900: #7d1313;
 
   /* ---- Type ---- */
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", sans-serif;
+  --font-display: var(--font-cinzel), var(--font-serif-gu), Georgia, serif;
+  --font-sans: var(--font-inter), var(--font-sans-gu), ui-sans-serif,
+    system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* ---- Motion ---- */
   --animate-fade-up: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -133,20 +141,73 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
 }
 
-/* Soft radial glow used behind dark heroes */
+/* Soft radial dot texture used on light sections */
 .glow-dots {
   background-image: radial-gradient(
     circle at center,
-    rgb(255 255 255 / 0.14) 1px,
+    rgb(123 30 30 / 0.07) 1px,
     transparent 1px
   );
   background-size: 26px 26px;
 }
 
+/* Glass card for light backgrounds */
 .glass {
-  background: rgb(255 255 255 / 0.07);
+  background: rgb(255 255 255 / 0.75);
   backdrop-filter: blur(14px);
-  border: 1px solid rgb(255 255 255 / 0.14);
+  border: 1px solid rgb(14 18 17 / 0.08);
+  box-shadow: 0 10px 30px -20px rgba(14, 18, 17, 0.1);
+}
+
+/* Ornamental divider under centred section titles: ── ◆ ── */
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--color-marigold-500);
+}
+.ornament::before,
+.ornament::after {
+  content: "";
+  height: 1px;
+  width: 3.5rem;
+  background: linear-gradient(
+    to var(--dir, right),
+    transparent,
+    var(--color-marigold-500)
+  );
+}
+.ornament::after {
+  --dir: left;
+}
+
+/* Hide the native scrollbar on horizontal sliders */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Subtle, light, and thin scrollbar */
+.light-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(14, 19, 18, 0.15) transparent;
+}
+.light-scrollbar::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+.light-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.light-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(14, 19, 18, 0.15);
+  border-radius: 4px;
+}
+.light-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(14, 19, 18, 0.25);
 }
 
 /* Stagger helper for hero children */

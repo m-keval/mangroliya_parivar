@@ -1,27 +1,26 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Icon } from "@/components/icon";
-import { Eyebrow } from "@/components/section-heading";
 
 type Crumb = { label: string; href?: string };
 
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-cream/60">
-      <Link href="/" className="transition-colors hover:text-cream">
-        Home
+    <nav aria-label="Breadcrumb" className="flex flex-wrap items-center justify-center gap-2 text-sm text-white/70">
+      <Link href="/" className="transition-colors hover:text-marigold-300">
+        હોમ
       </Link>
       {items.map((item) => (
         <span key={item.label} className="flex items-center gap-2">
-          <span aria-hidden className="text-cream/30">
-            /
+          <span aria-hidden className="text-marigold-400">
+            ›
           </span>
           {item.href ? (
-            <Link href={item.href} className="transition-colors hover:text-cream">
+            <Link href={item.href} className="transition-colors hover:text-marigold-300">
               {item.label}
             </Link>
           ) : (
-            <span className="text-cream">{item.label}</span>
+            <span className="text-marigold-300">{item.label}</span>
           )}
         </span>
       ))}
@@ -30,7 +29,7 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
 }
 
 /**
- * The dark, gradient-washed banner used at the top of every inner page.
+ * The maroon title band used at the top of every inner page.
  * Everything here is static markup, so it ships in the prerendered shell.
  */
 export function PageHero({
@@ -47,32 +46,27 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden bg-ink text-cream">
+    <section className="relative overflow-hidden border-b-4 border-marigold-500 bg-brand-800 text-white">
       <div
         aria-hidden
-        className="glow-dots pointer-events-none absolute inset-0 opacity-40"
+        className="absolute inset-0 opacity-25 [background-image:radial-gradient(circle_at_center,rgb(212_181_74/0.6)_1px,transparent_1px)] [background-size:22px_22px]"
       />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 -left-24 h-80 w-80 rounded-full bg-brand-600/30 blur-[110px]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-24 -bottom-32 h-72 w-72 rounded-full bg-marigold-500/20 blur-[110px]"
-      />
-
-      <div className="relative mx-auto max-w-7xl px-6 py-8 sm:py-10">
-        <Breadcrumbs items={crumbs} />
-        <div className="mt-5 max-w-3xl animate-fade-up">
-          {eyebrow && <Eyebrow tone="light">{eyebrow}</Eyebrow>}
-          <h1 className={`font-display text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl ${eyebrow ? "mt-4" : ""}`}>
-            {title}
-          </h1>
-          {description && (
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-cream/70 sm:text-lg">
-              {description}
-            </p>
-          )}
+      <div className="relative mx-auto max-w-4xl px-6 py-4 text-center sm:py-5">
+        {eyebrow && (
+          <p className="font-display text-xs font-semibold tracking-[0.24em] text-marigold-300 uppercase">
+            {eyebrow}
+          </p>
+        )}
+        <h1 className="mt-0.5 font-display text-xl font-bold text-balance sm:text-2xl">
+          {title}
+        </h1>
+        {description && (
+          <p className="mx-auto mt-1 max-w-2xl text-xs leading-relaxed text-white/75 sm:text-sm">
+            {description}
+          </p>
+        )}
+        <div className="mt-2">
+          <Breadcrumbs items={crumbs} />
         </div>
         {children}
       </div>
@@ -93,7 +87,7 @@ export function PageSection({
     tone === "sand"
       ? "bg-sand"
       : tone === "ink"
-        ? "bg-ink text-cream"
+        ? "bg-cream text-ink border-y border-ink/10"
         : "bg-cream";
   return (
     <section className={`relative ${bg} ${className}`}>
@@ -115,7 +109,7 @@ export function TextLink({
     <Link
       href={href}
       className={`group inline-flex items-center gap-2 text-sm font-semibold ${
-        tone === "light" ? "text-marigold-300" : "text-brand-700"
+        tone === "light" ? "text-brand-700" : "text-brand-700"
       }`}
     >
       {children}

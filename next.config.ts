@@ -13,10 +13,16 @@ const nextConfig: NextConfig = {
         hostname: "i.pravatar.cc",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "randomuser.me",
+        pathname: "/api/portraits/**",
+      },
     ],
   },
   cacheComponents: true,
   partialPrefetching: true,
+  allowedDevOrigins: ["192.168.1.81"],
   turbopack: {
     rules: {
       "*.css": {

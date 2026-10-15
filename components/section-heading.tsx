@@ -5,19 +5,21 @@ export function Eyebrow({
   tone = "brand",
 }: {
   children: ReactNode;
-  tone?: "brand" | "light";
+  tone?: "brand" | "light" | "dark";
 }) {
   return (
     <span
       className={`inline-flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.26em] uppercase ${
         tone === "brand"
           ? "text-brand-700"
-          : "text-marigold-300"
+          : tone === "light"
+            ? "text-marigold-600"
+            : "text-cream"
       }`}
     >
       <span
         aria-hidden
-        className={`h-px w-8 ${tone === "brand" ? "bg-brand-500" : "bg-marigold-400/70"}`}
+        className={`h-px w-8 ${tone === "brand" ? "bg-brand-500" : tone === "light" ? "bg-marigold-400/70" : "bg-cream/70"}`}
       />
       {children}
     </span>

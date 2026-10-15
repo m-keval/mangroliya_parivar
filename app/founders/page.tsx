@@ -16,7 +16,7 @@ export default function FoundersPage() {
   return (
     <>
       <PageHero
-        title="The people who laid the foundation"
+        title="પાયાના શિલ્પીઓ"
         crumbs={[{ label: "પાયાના શિલ્પીઓ" }]}
       />
 
@@ -38,7 +38,7 @@ export default function FoundersPage() {
                   <div className="flex items-start gap-5">
                     <span className="relative">
                       <Avatar member={member} size="lg" />
-                      <span className="absolute -top-2 -left-2 grid h-7 w-7 place-items-center rounded-full bg-ink font-display text-[11px] font-semibold text-marigold-300">
+                      <span className="absolute -top-2 -left-2 grid h-7 w-7 place-items-center rounded-full bg-brand-600 font-display text-[11px] font-semibold text-cream">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                     </span>
@@ -96,7 +96,7 @@ export default function FoundersPage() {
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 href="/committee"
-                className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream transition-colors hover:bg-brand-700"
+                className="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-brand-700 hover:bg-brand-700 hover:text-white"
               >
                 Meet the samiti
                 <Icon name="arrow-right" size={16} />
@@ -110,13 +110,13 @@ export default function FoundersPage() {
             </div>
           </div>
 
-          <blockquote className="rounded-3xl bg-ink p-7 text-cream">
-            <Icon name="quote" size={22} className="text-marigold-300" />
+          <blockquote className="rounded-3xl bg-sand p-7 text-ink border border-ink/10">
+            <Icon name="quote" size={22} className="text-marigold-600" />
             <p className="mt-4 font-display text-xl leading-snug font-semibold">
               A family which does not know its own history will one day have to
               be introduced to itself.
             </p>
-            <footer className="mt-5 border-t border-cream/15 pt-4 text-sm text-cream/60">
+            <footer className="mt-5 border-t border-ink/12 pt-4 text-sm text-ink/60">
               Shri Bhikhabhai Kalidas Mangroliya, 1931–2014
             </footer>
           </blockquote>

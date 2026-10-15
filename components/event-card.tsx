@@ -16,8 +16,8 @@ export function EventCard({ event }: { event: FamilyEvent }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-cream p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-[0_28px_60px_-40px_rgba(14,19,18,0.6)]">
       <div className="flex items-start gap-5">
-        <div className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl bg-ink text-cream transition-colors duration-300 group-hover:bg-brand-700">
-          <span className="text-[10px] font-semibold tracking-[0.18em] text-marigold-300 uppercase">
+        <div className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl bg-sand text-ink transition-colors duration-300 group-hover:bg-brand-700 group-hover:text-white">
+          <span className="text-[10px] font-semibold tracking-[0.18em] text-marigold-600 uppercase">
             {month}
           </span>
           <span className="font-display text-3xl leading-none font-semibold">
@@ -46,17 +46,17 @@ export function EventCard({ event }: { event: FamilyEvent }) {
 
       <dl className="mt-5 grid gap-2.5 border-t border-ink/8 pt-4 text-sm">
         <div className="flex gap-3 text-ink/75">
-          <dt className="sr-only">Date</dt>
+          <dt className="sr-only">તારીખ</dt>
           <Icon name="calendar" size={16} className="mt-0.5 shrink-0 text-brand-600" />
           <dd>{formatDate(event.date, "full")}</dd>
         </div>
         <div className="flex gap-3 text-ink/75">
-          <dt className="sr-only">Time</dt>
+          <dt className="sr-only">સમય</dt>
           <Icon name="clock" size={16} className="mt-0.5 shrink-0 text-brand-600" />
           <dd>{event.time}</dd>
         </div>
         <div className="flex gap-3 text-ink/75">
-          <dt className="sr-only">Venue</dt>
+          <dt className="sr-only">સ્થળ</dt>
           <Icon name="map-pin" size={16} className="mt-0.5 shrink-0 text-brand-600" />
           <dd>
             {event.venue}

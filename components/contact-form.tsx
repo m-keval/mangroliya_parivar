@@ -8,11 +8,11 @@ import { Icon } from "@/components/icon";
 const initialState: ContactState = { status: "idle" };
 
 const topics = [
-  "Add / update a family member",
-  "Event or gathering",
-  "Trust, scholarship or donation",
-  "Heritage & archive",
-  "Something else",
+  "પરિવારના સભ્યને ઉમેરો / અપડેટ કરો",
+  "ઇવેન્ટ અથવા મેળાવડો",
+  "ટ્રસ્ટ, સ્કોલરશિપ અથવા ડોનેશન",
+  "વારસો અને આર્કાઇવ (ઇતિહાસ)",
+  "અન્ય કોઈ વિષય",
 ];
 
 const fieldBase =
@@ -37,22 +37,22 @@ export default function ContactForm() {
           <Icon name="check" size={24} strokeWidth={2} />
         </span>
         <h3 className="mt-5 font-display text-2xl font-semibold text-ink">
-          Message received
+          સંદેશો મળી ગયો છે
         </h3>
         <p className="mt-3 text-sm leading-relaxed text-muted">{state.message}</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/members"
-            className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-cream transition-colors hover:bg-brand-700"
+            className="rounded-full border border-ink/15 bg-white px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-brand-700 hover:bg-brand-700 hover:text-white"
           >
-            Browse the directory
+            ડિરેક્ટરી જુઓ
           </Link>
           <button
             type="button"
             onClick={() => window.location.reload()}
-            className="rounded-full border border-ink/15 px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-sand"
+            className="rounded-full border border-ink/15 bg-white px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-brand-700 hover:bg-brand-700 hover:text-white"
           >
-            Send another note
+            બીજો સંદેશો મોકલો
           </button>
         </div>
       </div>
@@ -76,7 +76,7 @@ export default function ContactForm() {
             htmlFor="name"
             className="mb-2 block text-sm font-semibold text-ink"
           >
-            Your name
+            તમારું નામ
           </label>
           <input
             id="name"
@@ -84,7 +84,7 @@ export default function ContactForm() {
             type="text"
             autoComplete="name"
             defaultValue={state.values?.name}
-            placeholder="e.g. Jaydeep Rameshbhai"
+            placeholder="દા.ત. જયદીપ રમેશભાઈ"
             className={errorClass("name")}
             aria-invalid={Boolean(err("name"))}
           />
@@ -98,7 +98,7 @@ export default function ContactForm() {
             htmlFor="email"
             className="mb-2 block text-sm font-semibold text-ink"
           >
-            Email
+            ઈમેલ
           </label>
           <input
             id="email"
@@ -106,7 +106,7 @@ export default function ContactForm() {
             type="email"
             autoComplete="email"
             defaultValue={state.values?.email}
-            placeholder="you@example.com"
+            placeholder="તમારું@ઈમેલ.com"
             className={errorClass("email")}
             aria-invalid={Boolean(err("email"))}
           />
@@ -121,7 +121,7 @@ export default function ContactForm() {
           htmlFor="topic"
           className="mb-2 block text-sm font-semibold text-ink"
         >
-          What is this about?
+          આ વિષય શું છે?
         </label>
         <div className="relative">
           <select
@@ -132,7 +132,7 @@ export default function ContactForm() {
             aria-invalid={Boolean(err("topic"))}
           >
             <option value="" disabled>
-              Choose a topic…
+              વિષય પસંદ કરો…
             </option>
             {topics.map((t) => (
               <option key={t} value={t}>
@@ -156,14 +156,14 @@ export default function ContactForm() {
           htmlFor="message"
           className="mb-2 block text-sm font-semibold text-ink"
         >
-          Your message
+          તમારો સંદેશો
         </label>
         <textarea
           id="message"
           name="message"
           rows={6}
           defaultValue={state.values?.message}
-          placeholder="Tell us what you'd like to add, correct or ask…"
+          placeholder="તમારે શું ઉમેરવું, સુધારવું અથવા પૂછવું છે તે જણાવો…"
           className={`${errorClass("message")} resize-y`}
           aria-invalid={Boolean(err("message"))}
         />
@@ -174,22 +174,21 @@ export default function ContactForm() {
 
       <div className="flex flex-wrap items-center justify-between gap-4 pt-1">
         <p className="max-w-xs text-xs leading-relaxed text-muted">
-          Server-side validated — nothing is stored on this demo beyond the
-          server log.
+          તમારો ડેટા સુરક્ષિત છે.
         </p>
         <button
           type="submit"
           disabled={pending}
-          className="group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-cream transition-all hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
+          className="group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-brand-700 hover:bg-brand-700 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
         >
           {pending ? (
             <>
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-cream/40 border-t-cream" />
-              Sending…
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-ink/40 border-t-ink" />
+              મોકલાઈ રહ્યું છે…
             </>
           ) : (
             <>
-              Send to the trust
+              ટ્રસ્ટને મોકલો
               <Icon
                 name="arrow-right"
                 size={16}

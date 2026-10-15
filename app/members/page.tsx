@@ -19,8 +19,8 @@ export default function MembersPage({
   return (
     <>
       <PageHero
-        title="Everyone in the parivar"
-        crumbs={[{ label: "Parivar" }]}
+        title="પરિવારમાં દરેક વ્યક્તિ"
+        crumbs={[{ label: "પરિવાર" }]}
       />
 
       <PageSection>

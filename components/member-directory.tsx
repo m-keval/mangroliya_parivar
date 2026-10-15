@@ -95,7 +95,7 @@ export async function MemberDirectory({ searchParams }: { searchParams: Promise<
         <div className="flex gap-2">
           <button
             type="submit"
-            className="flex-1 rounded-xl bg-ink px-6 py-3 text-sm font-semibold text-cream transition-colors hover:bg-brand-700"
+            className="flex-1 rounded-xl border border-ink/15 bg-white px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-brand-700 hover:bg-brand-700 hover:text-white"
           >
             Search
           </button>
@@ -103,8 +103,8 @@ export async function MemberDirectory({ searchParams }: { searchParams: Promise<
             <Link
               href="/members"
               className="grid w-11 place-items-center rounded-xl border border-ink/12 text-muted transition-colors hover:bg-cream"
-              aria-label="Clear filters"
-              title="Clear filters"
+              aria-label="ફિલ્ટર્સ સાફ કરો"
+              title="ફિલ્ટર્સ સાફ કરો"
             >
               <Icon name="close" size={17} />
             </Link>
@@ -115,7 +115,7 @@ export async function MemberDirectory({ searchParams }: { searchParams: Promise<
       <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
         <p className="text-sm text-muted">
           <span className="font-semibold text-ink">{results.length}</span>{" "}
-          {results.length === 1 ? "member" : "members"}
+          {results.length === 1 ? "સભ્ય" : "સભ્યો"}
           {isFiltered && <> of {members.length} matching your filters</>}
         </p>
         <p className="flex items-center gap-2 text-xs text-muted">
@@ -144,7 +144,7 @@ export async function MemberDirectory({ searchParams }: { searchParams: Promise<
           </p>
           <Link
             href="/contact"
-            className="mt-6 inline-flex rounded-full bg-ink px-6 py-3 text-sm font-semibold text-cream transition-colors hover:bg-brand-700"
+            className="mt-6 inline-flex rounded-full border border-ink/15 bg-white px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-brand-700 hover:bg-brand-700 hover:text-white"
           >
             Request an addition
           </Link>
